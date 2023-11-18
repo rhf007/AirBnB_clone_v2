@@ -1,3 +1,10 @@
+Okay, Let's see this big stuff before I go for my NLP mid-term test.
+Last time, we made a nice console that accepts certain commands and do certain things to **OBJECTS** according to each command. We got ```create```, ```show```, ```update```, ```destroy```, and ```count```, and the necessary cmd preloop, postloop, ```quit```, and ```EOF```. And what we'd do is that for storage we used a ```FileStorage``` for storing.
+
+And now we need to store things in an ACTUAL database, for the convenience and all the benefits a real database would offer, and also because we're cool, and cool people should always look forward to getting even cooler.
+
+![db](https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step2.png)
+
 <center> <h1>HBNB - The Console</h1> </center>
 
 This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
