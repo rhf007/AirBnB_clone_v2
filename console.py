@@ -115,6 +115,20 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
+	# first we split args at every space
+        split_args = args.split(" ")
+        # Param syntax: <key name>=<value>
+        # so we need a dictionary or kwargs to save args
+        param_kwargs = {}
+        # llop on every parameter (key/value)
+        for i in range(1, len(aplit_args)):
+            k, v = split_args[i].split("=")
+            # if value has ""
+            if v == '"':
+                # remove
+                v.strip('"')
+                # replace _ with space
+		v.replace("_", " ")
         if not args:
             print("** class name missing **")
             return
