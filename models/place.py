@@ -16,3 +16,7 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = []
+    id = ""
+    def __init__(self, *args, **kwargs):
+        """init to inherit id and stuff"""
+        super().__init__(*args, **kwargs)
