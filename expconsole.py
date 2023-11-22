@@ -66,6 +66,8 @@ class HBNBCommand(cmd.Cmd):
                 except ValueError:
                     assumed_convert_value = value.strip('"').replace("_", " ")
             params[key] = assumed_convert_value
+        print("Class:", cls)
+        print("Params:", params)
         new_instance = HBNBCommand.classes[cls](**params)
         storage.new(new_instance)
         new_instance.save()
