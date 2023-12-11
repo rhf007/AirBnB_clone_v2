@@ -13,49 +13,21 @@ env.hosts = ["54.164.162.231", "54.87.210.192"]
 
 def do_deploy(archive_path):
     """deply archive"""
-    if os.path.exists(archive_path) is True:
-        filename = archive_path.split("/")[-1]
-
-        try:
-            put(filename, "/tmp/")
-
-            filenoext = filename.split(".")[0]
-
-            mkdircmd = "mkdir -p /data/web_static/releases/{}".format(filenoext)
-
-            uncompresscmd = (
-                             f"tar -xzf /tmp/{filename} -C "
-                             f"/data/web_static/releases/{filenoext}/"
-            )
-
-            deletecmd = "rm {}".format(filename)
-
-            mvcmd = (
-                     f"mv /data/web_static/releases/{filenoext}/web_static/* "
-                    f"/data/web_static/releases/{filenoext}/"
-            )
-
-            deletecpcmd = (
-                           f"rm -rf /data/web_static/releases/"
-                           f"{filenoext}/web_static"
-            )
-
-            deleteslcmd = "rm -rf /data/web_static/current"
-
-            createnewslcmd = (
-                              f"ln -sf /data/web_static/releases/{filenoext} "
-                              f"/data/web_static/current"
-            )
-
-            run(mkdircmd)
-            run(uncompresscmd)
-            run(deletecmd)
-            run(mvcmd)
-            run(deletecpcmd)
-            run(deleteslcmd)
-            run(createnewslcmd)
-            return True
-        except:
-            return False
-    else:
+    if not os.path.exists(archive_path):
+        return False
+    try:
+        put(archive_path, '/tmp/')
+        file_name = archive_path.split('/')[-1]
+        file_name_noext = file_name.split('.')[0]
+        new_folder = '/data/web_static/releases/' + file_name_noext + '/'
+        run('sudo mkdir -p {}'.format(new_folder))
+        run('sudo tar -xzf /tmp/{} -C {}'.format(file_name, new_folder))
+        run('sudo rm /tmp/{}'.format(file_name))
+        run('sudo mv {}web_static/* {}'.format(new_folder, new_folder))
+        run('sudo rm -rf {}web_static'.format(new_folder))
+        run('sudo rm -rf /data/web_static/current')
+        run('sudo ln -s {} /data/web_static/current'.format(new_folder))
+        print("New version deployed!")
+        return True
+    except:
         return False
