@@ -15,19 +15,30 @@ def do_deploy(archive_path):
     """deply archive"""
     if not os.path.exists(archive_path):
         return False
+
     try:
+        archive_name = archive_path.split("/")[-1]
+        archive_no_ext = archive_name.split(".")[0]
+
         put(archive_path, '/tmp/')
-        file_name = archive_path.split('/')[-1]
-        file_name_noext = file_name.split('.')[0]
-        new_folder = '/data/web_static/releases/' + file_name_noext + '/'
-        run('sudo mkdir -p {}'.format(new_folder))
-        run('sudo tar -xzf /tmp/{} -C {}'.format(file_name, new_folder))
-        run('sudo rm /tmp/{}'.format(file_name))
-        #run('sudo mv {}web_static/* {}'.format(new_folder, new_folder))
-        run('sudo rm -rf {}web_static'.format(new_folder))
+
+        run('sudo mkdir -p /data/web_static/releases/{}'.format(archive_no_ext))
+
+        run('sudo tar -xzf /tmp/{} -C /data/web_static/releases/{}'.format(
+            archive_name, archive_no_ext))
+
+        run('sudo rm /tmp/{}'.format(archive_name))
+
+        run('sudo mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}'.format(
+            archive_no_ext, archive_no_ext))
+
         run('sudo rm -rf /data/web_static/current')
-        run('sudo ln -s {} /data/web_static/current'.format(new_folder))
-        print("New version deployed!")
+
+        run('sudo ln -s /data/web_static/releases/{} /data/web_static/current'.format(
+            archive_no_ext))
+
+        print('New version deployed!')
         return True
-    except:
+
+    except Exception as e:
         return False
