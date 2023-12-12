@@ -160,3 +160,8 @@ upload.succeeded
 ```alias``` allows you to **remap some URL path below the root to some other directory so that you can serve static files from elsewhere.** For example, for a ```location /static/``` you might define ```alias /var/www/html/files/```. In this case, instead of going to a subdirectory of the root, the alias will be substituted for the part of the URL path in the location. So ```/static/``` becomes ```/var/www/html/files/``` and a request for ```/static/myapp.css``` will try to load the file ```/var/www/html/files/myapp.css``` instead of ```/var/www/html/public/css/myapp.css```.
 
 **It doesn't make sense to use ```alias``` with ```location /```.**
+
+Some extra links:
+
+* [1](https://docs.fabfile.org/en/1.13/usage/fab.html)
+* [2](https://www.fabfile.org/)
