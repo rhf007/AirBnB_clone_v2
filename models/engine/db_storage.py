@@ -37,7 +37,7 @@ class DBStorage:
             for key in HBNBCommand.classes:
                 if key != "BaseModel":
                     value = HBNBCommand.classes[key]
-                for r in self.__session.query(val).all():
+                for r in self.__session.query(value).all():
                   classdictionary.update({'{}.{}'.format(key, r.id): r})
             return classdictionary
         else:
