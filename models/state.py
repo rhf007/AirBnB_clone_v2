@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
-from models.base_model import BaseModel, Base
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, DateTime
-from sqlalchemy.orm import sessionmaker
+import models
+from models.base_model import BaseModel, Base 
+from models.city import City
+from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy.ext.declarative import declarative_base 
+from sqlalchemy import Column, Integer, String, DateTime, create_engine
 from os import getenv
+
+
 
 class State(BaseModel, Base):
     """ State class """
