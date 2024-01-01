@@ -660,3 +660,65 @@ Macros also expose some of their internal details. The following attributes are 
 **(retrieve with flask)**
 
 **(display with jinja)**
+
+## Some EXTRA notes because of certain things I encountered during the tasks
+
+### What is a Context (For the 125471465th time)
+
+In a general sense, the term "context" refers to the circumstances, background, or environment in which something exists or occurs. It provides the necessary information or conditions for understanding and interpreting a particular situation.
+
+a context is a container or environment that holds relevant information for a specific part of a program or system.
+
+
+In the context of Flask and web frameworks in general, the term "context" refers to a way of storing and managing information that is relevant to the current operation or request being processed. Context helps maintain state and allows different parts of the application to share information without explicitly passing it around as function parameters.
+
+**Purpose:**
+
+    * **Scope Management:** Context helps define the scope and boundaries within which certain information or operations are valid and relevant.
+
+    * **Data Sharing:** It provides a mechanism for sharing data between different components of a program without relying on global variables.
+
+**Types of Context:**
+
+     * **Application Context:** Encompasses data or configurations that are relevant to the entire application. It lasts for the duration of the application and is shared among various components.
+
+    * **Request Context:** Specific to an individual HTTP request. It includes data related to that particular request and is created and destroyed for each incoming request.
+
+**Use Cases:**
+
+    * **Settings and Configurations:** Storing and managing global settings, configurations, and constants.
+
+    * **Resource Management:** Efficiently managing resources like database connections, ensuring they are created, reused, and cleaned up appropriately.
+
+    * **Stateful Operations:** Maintaining state information across different parts of a program or during the handling of a request.
+
+### Application Context
+
+The application context in Flask represents a set of data or configurations that are relevant to the entire application. It spans the entire lifetime of the application and is created when the application starts processing a request. It lasts until the request has been fully processed.
+
+**Use Cases:**
+
+    * **Configuration Settings:** Information such as database connection details, secret keys, and other configuration settings that are constant throughout the application.
+
+    * **Database Connections:** Establishing and managing database connections that can be reused across different parts of the application.
+
+    * **Logging and Debugging:** Storing global settings related to logging and debugging.
+
+### Request Context
+
+The request context is specific to an individual HTTP request and contains data related to that particular request. It is created when a request is received and persists until the request has been handled.
+
+**Use Cases:**
+
+    * **Request Information:** Details such as request parameters, headers, and other information specific to the incoming HTTP request.
+
+    * **Session Management:** Handling user sessions and storing session-related information.
+
+    * **Authentication and Authorization:** Storing user credentials or authorization details during the request.
+
+### @app.teardown_appcontext
+
+
+In Flask, ```@app.teardown_appcontext``` is a decorator used to register a function that will be called when the application context is popped. The application context in Flask is tied to the request and response cycle. When a request is processed, an application context is pushed onto the context stack, and when the request is finished, the context is popped.
+
+The ```@app.teardown_appcontext``` decorator allows you to specify a function that should be executed when the application context is torn down. This can be useful for performing cleanup tasks or releasing resources associated with the application context.
