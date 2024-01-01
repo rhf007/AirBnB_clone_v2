@@ -7,11 +7,13 @@ from models import storage
 
 app = Flask(__name__)
 
+
 @app.route('/states_list', strict_slashes=False)
 def states_list(n):
     """doing operations on states"""
     states = storage.all("State")
     return render_template("7-states_list.html", states=states)
+
 
 @app.teardown_appcontext
 def teardown_meth(e):
